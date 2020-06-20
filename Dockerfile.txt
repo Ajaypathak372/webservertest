@@ -1,0 +1,9 @@
+FROM centos
+
+RUN yum install java-11-openjdk.x86_64 sudo git wget -y
+RUN sudo wget -O /etc/yum.repos.d/jenkins.repo https://pkg.jenkins.io/redhat-stable/jenkins.repo
+RUN sudo rpm --import https://pkg.jenkins.io/redhat-stable/jenkins.io.key
+RUN yum install jenkins -y
+RUN yum install /sbin/service -y
+EXPOSE 8080
+CMD sudo service jenkins start -DEFOREGROUND && /bin/bash
